@@ -1,5 +1,4 @@
 class BaseApi
-  include HTTMultiParty
 
   def get(options={})
     raise Exception unless options[:path].present?
