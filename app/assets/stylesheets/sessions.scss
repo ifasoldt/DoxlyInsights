@@ -1,0 +1,49 @@
+// Place all the styles related to the sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login-page, .registration-page {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  overflow: auto;
+
+  .site-title {
+    font-size: 32px;
+    color: white;
+  }
+
+  .login-form, .registration-form {
+    width: 500px;
+
+    .submit-btn {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      padding: 0;
+      input {
+        background-color: $col-orange;
+        border: 1px solid $col-orange;
+        border-radius: 4px;
+      }
+    }
+
+    .title {
+      display: flex;
+      padding: 20px 0;
+      width: 100%;
+      justify-content: flex-start;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .register, .login {
+      padding-top: 12px;
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+}

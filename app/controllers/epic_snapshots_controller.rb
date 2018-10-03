@@ -1,0 +1,2 @@
+class EpicSnapshotsController < ApplicationController
+end

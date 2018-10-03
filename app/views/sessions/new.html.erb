@@ -1,0 +1,25 @@
+<div class="login-page">
+  <div class="site-title">
+    DoxlyInsights
+  </div>
+  <div class="login-form">
+    <div class="title">
+      Login
+    </div>
+    <%= form_for @user, url: sessions_path, method: :post, :html => { :class => 'no-turboboost' } do |f|%>
+      <div class="form-group">
+        <label htmlFor="input-email">Email Address</label>
+        <%= f.text_field :email, id: 'input-email', class: 'form-control', placeholder: "example@gmail.com" %>
+      </div>
+
+      <div class="form-group">
+        <label htmlFor="input-password">Password</label>
+        <%= f.password_field :password, id: 'input-password', class: 'form-control', autocomplete: "off", placeholder: "Required" %>
+      </div>
+
+      <div class="col-xs-6 submit-btn">
+          <%= f.submit 'SIGN IN', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
