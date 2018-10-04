@@ -18,7 +18,6 @@ class JiraApi < BaseApi
   private
 
   def authentication_header
-    debugger
     { Authorization: "Basic #{encoded_jira_credentials}" }
   end
 
