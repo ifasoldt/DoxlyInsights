@@ -25,7 +25,6 @@ class Epic < ApplicationRecord
       self.unestimated_tickets +=1 if storypoints == 0
     end
     epic_snapshots.create(completed_storypoints: total_completed_storypoints, total_storypoints: total_storypoints)
-    debugger
     self.highest_storypoint_count = total_storypoints if total_storypoints > highest_storypoint_count.to_i
     save
   end

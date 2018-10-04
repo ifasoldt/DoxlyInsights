@@ -16,7 +16,6 @@ class BaseApi
     headers   = options.fetch(:headers, {})
     data      = options.fetch(:data, {})
     path      = options.fetch(:path)
-    debugger
     response = connection(options).post do |request|
       request.url path
       request.body = data
