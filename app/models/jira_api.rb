@@ -5,11 +5,13 @@ class JiraApi < BaseApi
     get_epic_issues: -> (epic_id) {"https://doxly-jira.atlassian.net/rest/api/3/search?jql='epic link'=#{epic_id}&maxResults=100"}
   }
 
-  def get_epics
+  def get_epics(options={})
     parser.issues_parser(get({ path: ROUTES[:get_epics].call, headers: authentication_header }))
   end
 
-  def get_epic_issues
+  def get_epic_issues(options={})
+    epic_id = options.fetch(:epic_id, nil)
+    parser.issues_parser(get({ path: ROUTES[:get_epic_issues].call(epic_id), headers: authentication_header }))
   end
 
 

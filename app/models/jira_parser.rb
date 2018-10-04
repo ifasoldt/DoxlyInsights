@@ -1,6 +1,6 @@
 class JiraParser
 
-  def issue_parser(response)
+  def issues_parser(response)
     response["issues"]
   end
 end
