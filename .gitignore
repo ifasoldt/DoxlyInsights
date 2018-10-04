@@ -22,3 +22,6 @@ config/config.yml
 # Ignore Byebug command history file.
 .byebug_history
 config/keys/*
+
+# Ignore application configuration
+/config/application.yml

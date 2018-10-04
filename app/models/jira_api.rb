@@ -18,12 +18,12 @@ class JiraApi < BaseApi
   private
 
   def authentication_header
+    debugger
     { Authorization: "Basic #{encoded_jira_credentials}" }
   end
 
   def encoded_jira_credentials
-    rails_config = Rails.application.config.di_config
-    Base64.encode64("#{rails_config["jira_username"]}:#{rails_config["jira_password"]}")
+    Base64.encode64("#{ENV["jira_username"]}:#{ENV["jira_password"]}")
   end
 
   def parser
