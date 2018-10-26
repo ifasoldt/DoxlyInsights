@@ -1,7 +1,7 @@
 class JiraApi < BaseApi
   # routes object that will hold all of the specific urls to hit the iManage10 api.
   ROUTES = {
-    get_epics: -> {"https://doxly-jira.atlassian.net/rest/api/3/search?jql=project=10000%26type=epic%26created>-10w&maxResults=100"},
+    get_epics: -> {"https://doxly-jira.atlassian.net/rest/api/3/search?jql=project=10000%26type=epic%26created>-40w&maxResults=100"},
     get_epic_issues: -> (epic_id) {"https://doxly-jira.atlassian.net/rest/api/3/search?jql='epic link'=#{epic_id}&maxResults=100"}
   }
 

@@ -1,3 +1,5 @@
 <div>
-  Epics go here
+  <% @epics.each do |epic| %>
+    <%= render 'epic', epic: epic %>
+  <% end %>
 </div>

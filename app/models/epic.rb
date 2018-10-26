@@ -1,7 +1,7 @@
 class Epic < ApplicationRecord
   has_many :epic_snapshots
 
-  COMPLETED_STATUSES = ["Closed", "Ready To Deploy", "Dev Complete", "QA"]
+  COMPLETED_STATUSES = ["Closed", "Ready To Deploy", "Dev Complete", "QA", "Done"]
 
   def build_from_jira_epic(epic)
     is_active = -> { epic["fields"]["description"].to_s.include?("active!") }
@@ -25,7 +25,7 @@ class Epic < ApplicationRecord
       self.unestimated_tickets +=1 if storypoints == 0
     end
     epic_snapshots.create(completed_storypoints: total_completed_storypoints, total_storypoints: total_storypoints)
-    self.highest_storypoint_count = total_storypoints if total_storypoints > highest_storypoint_count.to_i
+    self.highest_storypoint_count = total_storypoints
     save
   end
 

@@ -6,15 +6,17 @@ namespace :jira_tasks do
     epics = api.get_epics
     epics.each do |epic|
       di_epic = create_or_update_epic(epic)
-      di_epic.create_snapshot!
+      di_epic.create_snapshot! if di_epic
     end
   end
 
   def create_or_update_epic(epic)
-    di_epic = Epic.find_by(jira_id: epic["id"]) || Epic.new
-    di_epic.build_from_jira_epic(epic)
-    di_epic.save
-    di_epic
+    if epic["fields"]["description"].to_s.include?("active!")
+      di_epic = Epic.find_by(jira_id: epic["id"]) || Epic.new
+      di_epic.build_from_jira_epic(epic)
+      di_epic.save
+      di_epic
+    end
   end
 
   def api

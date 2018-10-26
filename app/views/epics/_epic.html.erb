@@ -1,0 +1,36 @@
+<div class="epic-container">
+  <div class="epic-title">
+    <%= epic.name %>
+  </div>
+  <%= line_chart [
+      {name: 'Target', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at, snapshot.total_storypoints]} },
+      {name: 'Progress', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at, snapshot.completed_storypoints]} }
+    ], min: 0, max: epic.highest_storypoint_count * 1.2, points: false, xtitle: "Time", ytitle: "Storypoint Completion",
+    library: {
+      scales: {
+        yAxes: [
+          {
+            scaleLabel: {
+              fontColor: 'gray',
+            },
+            gridLines: {
+              color: ['gray', 'transparent', 'transparent', 'transparent', 'transparent']
+            },
+            drawBorder: false
+          }
+        ],
+        xAxes: [
+          {
+            scaleLabel: {
+              fontColor: 'gray',
+            },
+            gridLines: {
+              color: ['gray', 'black', 'black', 'black', 'black']
+            },
+            drawBorder: false
+          }
+        ]
+      }
+    }
+ %>
+</div>
