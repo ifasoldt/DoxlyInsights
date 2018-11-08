@@ -4,13 +4,13 @@
       <%= epic.name %>
     </div>
     <div class="total-tickets">
-      Total Tickets: <%= epic.total_tickets %>
+      Total Tickets: <%= epic.total_tickets.to_i %>
     </div>
     <div class="completed-tickets">
-      Completed Tickets: <%= epic.completed_tickets %>
+      Completed Tickets: <%= epic.completed_tickets.to_i %>
     </div>
     <div class="unestimated-tickets">
-      Unestimated Tickets: <%= epic.unestimated_tickets %>
+      Unestimated Tickets: <%= epic.unestimated_tickets.to_i %>
     </div>
   </div>
   <%= line_chart [
