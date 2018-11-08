@@ -1,10 +1,21 @@
 <div class="epic-container">
-  <div class="epic-title">
-    <%= epic.name %>
+  <div class="ticket-stats">
+    <div class="epic-title">
+      <%= epic.name %>
+    </div>
+    <div class="total-tickets">
+      Total Tickets: <%= epic.total_tickets %>
+    </div>
+    <div class="completed-tickets">
+      Completed Tickets: <%= epic.completed_tickets %>
+    </div>
+    <div class="unestimated-tickets">
+      Unestimated Tickets: <%= epic.unestimated_tickets %>
+    </div>
   </div>
   <%= line_chart [
-      {name: 'Target', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at, snapshot.total_storypoints]} },
-      {name: 'Progress', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at, snapshot.completed_storypoints]} }
+      {name: 'Target', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.strftime("%b %d, %Y"), snapshot.total_storypoints]} },
+      {name: 'Progress', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.strftime("%b %d, %Y"), snapshot.completed_storypoints]} }
     ], min: 0, max: epic.highest_storypoint_count * 1.2, points: false, xtitle: "Time", ytitle: "Storypoint Completion",
     library: {
       scales: {
