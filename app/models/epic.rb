@@ -33,7 +33,19 @@ class Epic < ApplicationRecord
     self.highest_storypoint_count = total_storypoints
     self.total_tickets = epic_issues.length
     self.completed_tickets = number_of_completed_tickets
-    save
+    if save
+      ActionCable.server.broadcast('epics',
+        html: html(self),
+        epic: self
+      )
+    end
+  end
+
+  def html(epic)
+    ApplicationController.render(
+      partial: 'epics/epic',
+      locals: { epic: epic }
+    )
   end
 
 

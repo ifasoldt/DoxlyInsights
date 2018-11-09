@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   resources :users
   resources :epic_snapshots
   resources :epics
