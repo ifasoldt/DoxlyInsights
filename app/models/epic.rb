@@ -2,6 +2,7 @@ class Epic < ApplicationRecord
   has_many :epic_snapshots
 
   COMPLETED_STATUSES = ["Closed", "Ready To Deploy", "Dev Complete", "QA", "Done"]
+  MAX_ISSUES_PER_REQUEST = 100
 
   def build_from_jira_epic(epic)
     is_active = -> { epic["fields"]["description"].to_s.include?("active!") }
@@ -14,7 +15,15 @@ class Epic < ApplicationRecord
   end
 
   def create_snapshot!
-    epic_issues = api.get_epic_issues({ epic_id: jira_id })
+    continue = true
+    start_at = 0
+    epic_issues = []
+    while continue
+      batch_of_issues = api.get_epic_issues({ epic_id: jira_id, start_at: start_at })
+      epic_issues += batch_of_issues
+      continue = false unless batch_of_issues.length == MAX_ISSUES_PER_REQUEST
+      start_at += 100
+    end
     total_storypoints = 0
     total_completed_storypoints = 0
     number_of_completed_tickets = 0
@@ -34,10 +43,10 @@ class Epic < ApplicationRecord
     self.total_tickets = epic_issues.length
     self.completed_tickets = number_of_completed_tickets
     if save
-      ActionCable.server.broadcast('epics',
-        html: html(self),
-        epic: self
-      )
+      # ActionCable.server.broadcast('epics',
+      #   html: html(self),
+      #   epic: self
+      # )
     end
   end
 
