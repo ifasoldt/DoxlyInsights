@@ -1,7 +1,16 @@
+<%= round_up = -> (n, increment) { increment*((n+increment-1)/increment) } %>
+
+end
 <div id="epic-<%= epic.id %>" class="epic-container">
   <div class="ticket-stats">
     <div class="epic-title">
       <%= epic.name %>
+    </div>
+    <div class="current-target">
+      Current Target: <%= epic.epic_snapshots.last.total_storypoints %>
+    </div>
+    <div class="current-progress">
+      Current Progress: <%= epic.epic_snapshots.last.completed_storypoints %>
     </div>
     <div class="total-tickets">
       Total Tickets: <%= epic.total_tickets.to_i %>
@@ -16,7 +25,7 @@
   <%= line_chart [
       {name: 'Target', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.in_time_zone("EST").strftime("%B %e %Y %l %p"), snapshot.total_storypoints]} },
       {name: 'Progress', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.in_time_zone("EST").strftime("%B %e %Y %l %p"), snapshot.completed_storypoints]} }
-    ], height: "600px", colors: ["#c32aff", "#39ff14"], min: 0, max: (epic.highest_storypoint_count * 1.2).to_i, points: false, xtitle: "Time", ytitle: "Storypoint Completion",
+    ], height: "600px", colors: ["#c32aff", "#39ff14"], min: 0, max: round_up.call(epic.highest_storypoint_count.to_i, 25), points: false, xtitle: "Time", ytitle: "Storypoints",
     library: {
       scales: {
         yAxes: [

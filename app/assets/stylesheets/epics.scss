@@ -11,5 +11,11 @@
   .ticket-stats {
     font-size: 16px;
     color: gray;
+    .current-target {
+      color:#c32aff;
+    }
+    .current-progress {
+      color: #39ff14;
+    }
   }
 }
