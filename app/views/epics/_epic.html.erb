@@ -16,7 +16,7 @@
   <%= line_chart [
       {name: 'Target', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.strftime("%B %e %Y %l %p"), snapshot.total_storypoints]} },
       {name: 'Progress', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.strftime("%B %e %Y %l %p"), snapshot.completed_storypoints]} }
-    ], height: "600px", colors: ["#c32aff", "#39ff14"], min: 0, max: epic.highest_storypoint_count * 1.2, points: false, xtitle: "Time", ytitle: "Storypoint Completion",
+    ], height: "600px", colors: ["#c32aff", "#39ff14"], min: 0, max: (epic.highest_storypoint_count * 1.2).to_i, points: false, xtitle: "Time", ytitle: "Storypoint Completion",
     library: {
       scales: {
         yAxes: [
