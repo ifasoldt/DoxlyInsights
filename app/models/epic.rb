@@ -1,7 +1,7 @@
 class Epic < ApplicationRecord
   has_many :epic_snapshots
 
-  COMPLETED_STATUSES = ["Closed", "Ready To Deploy", "Dev Complete", "QA", "Done"]
+  COMPLETED_STATUSES = ["Closed", "Ready To Deploy", "QA", "Done"]
   MAX_ISSUES_PER_REQUEST = 100
 
   def build_from_jira_epic(epic)
