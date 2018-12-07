@@ -29,7 +29,7 @@ class Epic < ApplicationRecord
     number_of_completed_tickets = 0
     self.unestimated_tickets = 0
     epic_issues.each do |epic_issue|
-      storypoints = epic_issue["fields"]["customfield_10021"].to_i
+      storypoints = (epic_issue["fields"]["customfield_10800"] || epic_issue["fields"]["customfield_10021"].to_i)
       total_storypoints += storypoints
       completed = COMPLETED_STATUSES.include?(epic_issue["fields"]["status"]["name"])
       if completed

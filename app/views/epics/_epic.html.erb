@@ -23,8 +23,8 @@ end
     </div>
   </div>
   <%= line_chart [
-      {name: 'Target', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.in_time_zone("EST").strftime("%B %e %Y %l %p"), snapshot.total_storypoints]} },
-      {name: 'Progress', data: epic.epic_snapshots.map{|snapshot| [snapshot.created_at.in_time_zone("EST").strftime("%B %e %Y %l %p"), snapshot.completed_storypoints]} }
+      {name: 'Target', data: epic.epic_snapshots.select{ |snapshot| !(snapshot.created_at.in_time_zone("EST").saturday? || snapshot.created_at.in_time_zone("EST").sunday?) }.map{|snapshot| [snapshot.created_at.in_time_zone("EST").strftime("%B %e %Y %l %p"), snapshot.total_storypoints]} },
+      {name: 'Progress', data: epic.epic_snapshots.select{ |snapshot| !(snapshot.created_at.in_time_zone("EST").saturday? || snapshot.created_at.in_time_zone("EST").sunday?) }.map{|snapshot| [snapshot.created_at.in_time_zone("EST").strftime("%B %e %Y %l %p"), snapshot.completed_storypoints]} }
     ], height: "600px", colors: ["#c32aff", "#39ff14"], min: 0, max: round_up.call(epic.highest_storypoint_count.to_i, 25), points: false, xtitle: "Time", ytitle: "Storypoints",
     library: {
       scales: {
